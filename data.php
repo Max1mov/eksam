@@ -18,7 +18,7 @@
 		
 	}
 	
-	$car_plate = $color = $car_plate_error = $color_error = "";
+	$teema_name = $seletus = $teema_name_error = $seletus_error = "";
 	
 	// et ei ole tühjad
 	// clean input
@@ -26,29 +26,29 @@
 	
 	if(isset($_POST["create"])){
 
-		if ( empty($_POST["car_plate"]) ) {
-			$car_plate_error = "See väli on kohustuslik";
+		if ( empty($_POST["teema_name"]) ) {
+			$teema_name_error = "See väli on kohustuslik";
 		}else{
-			$car_plate = cleanInput($_POST["car_plate"]);
+			$teema_name = cleanInput($_POST["teema_name"]);
 		}
 
-		if ( empty($_POST["color"]) ) {
-			$color_error = "See väli on kohustuslik";
+		if ( empty($_POST["seletus"]) ) {
+			$seletus_error = "See väli on kohustuslik";
 		} else {
-			$color = cleanInput($_POST["color"]);
+			$seletus = cleanInput($_POST["seletus"]);
 		}
 
-		if(	$car_plate_error == "" && $color_error == ""){
+		if(	$teema_name_error == "" && $seletus_error == ""){
 			
 			// functions.php failis käivina funktsiooni
 			// msq on message funktsioonist mis tagasi saadame
-			$msg = createCarPlate($car_plate, $color);
+			$msg = createPostName($teema_name, $seletus);
 			
 			if($msg != ""){
 				//salvestamine õnnestus
 				// teen tühjaks input value'd
-				$car_plate = "";
-				$color = "";
+				$teema_name = "";
+				$seletus = "";
 								
 				echo $msg;
 				
@@ -74,11 +74,11 @@
 	<a href="?logout=1"> Logi välja</a>
 </p>
 
- <h2>Lisa auto</h2>
+ <h2>Lisa POST</h2>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  	<label for="car_plate" >auto nr</label><br>
-	<input id="car_plate" name="car_plate" type="text" value="<?=$car_plate; ?>"> <?=$car_plate_error; ?><br><br>
-  	<label>värv</label><br>
-	<input name="color" type="text" value="<?=$color; ?>"> <?=$color_error; ?><br><br>
+  	<label for="teema_name" >auto nr</label><br>
+	<input id="teema_name" name="teema_name" type="text" value="<?=$teema_name; ?>"> <?=$teema_name_error; ?><br><br>
+  	<label>tekst</label><br>
+	<input name="seletus" type="text" value="<?=$seletus; ?>"> <?=$seletus_error; ?><br><br>
   	<input type="submit" name="create" value="Salvesta">
   </form>
